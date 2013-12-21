@@ -1,14 +1,11 @@
-package main
-
+package speechtext
 import (
     //"cfg"
     "fmt"
     "os/exec"
+    "strings"
+    "strconv"
 )
-
-// #include <stdio.h>
-// #include <errno.h>
-import "C"
 
 
 
@@ -20,8 +17,8 @@ func check(err error)  {
 }
 
 
-func speaktext(plustext string)  {
-
+func speaktext(nonplustext string)  {
+    plustext := plussify_string(nonplustext) 
     var err error
     querystring := "http://tts-api.com/tts.mp3?q=" + plustext + " &"
     
@@ -36,17 +33,11 @@ func speaktext(plustext string)  {
 
 func plussify_string(nonplussed string) string {
 
-    
-fmt.Println("hi")
+    plussedstring := strings.Replace(nonplussed, " ", "+",-1)
 
 
 
-return "hi"
-
-
-
-
-
+return plussedstring
 }
 
 // Add timer loop between replies
@@ -64,13 +55,10 @@ return "hi"
 
 
    
-func main() {
+func SpeechText(selection int) {
 
-speaktext("Rogers+heart+is+evasive+...+like+a+ghostcrab")
-ac := []byte("How are you doing?")
-
-fmt.Println(ac)
-
+getstring = configgetstring(selection)
+speaktext(getstring)    
 
 
 

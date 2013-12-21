@@ -9,11 +9,13 @@
 package main
 
 import . "code.google.com/p/goncurses"
+import "speechtext"
 
 const (
 	HEIGHT = 18
 	WIDTH  = 40
 )
+
 
 func main() {
 	var active int
@@ -61,10 +63,11 @@ func main() {
 				active += 1
 			}
 		case "enter":
-			stdscr.MovePrintf(23, 0, "Choice #%d: %s selected",
-				active,
-				menu[active])
-			
+			//stdscr.MovePrintf(23, 0, "Choice #%d: %s selected",
+			////	active,
+			////	menu[active])
+		    speechtext.SpeechText(active)	
+            
             // active is the number chosen
             // menu[active] is the menu entry
             // make a call to PlaySelection() 
