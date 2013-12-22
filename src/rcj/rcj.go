@@ -20,8 +20,8 @@ import (
     
     
 const (
-	HEIGHT = 18
-	WIDTH  = 40
+	HEIGHT = 16
+    WIDTH  = 40
 )
 
 
@@ -71,7 +71,7 @@ func main() {
 
     
 	rows, cols := stdscr.Maxyx()
-	y, x := (((rows-HEIGHT)/2+2)), (cols-WIDTH)/2
+	y, x := (((rows-HEIGHT)/2)+4), (cols-WIDTH)/2
     win, _ := NewWindow(HEIGHT, WIDTH, y, x)
 	win.Keypad(true)
     stdscr.Print("\n o\"\"50;@V\a\n")
@@ -79,7 +79,7 @@ func main() {
      
     stdscr.Print("\n\n") 
 
-    stdscr.Print("  \n                   VIRTUAL FAMILY HISTORIAN ")
+    stdscr.Print("  \n                   VIRTUAL FAMILY HISTORIAN\n ")
 	stdscr.Refresh()
 
 	printmenu(&win, menu, active)
