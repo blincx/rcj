@@ -22,7 +22,7 @@ func speaktext(nonplustext string)  {
     
     err = exec.Command("xdg-open", querystring).Run()
    check(err) 
-   err = exec.Command("wmctrl","-a xterm").Start()
+   err = exec.Command("wmctrl","-a roxterm").Start()
     check(err)
 
     
@@ -55,8 +55,15 @@ return plussedstring
    
 func SpeechText(selection string) {
 
-speaktext(selection)    
 
+if selection=="9" {
+    var err error
+    err = exec.Command("google-chrome", "robotnature.mp3").Start()
+    check(err) 
+
+} else{
+speaktext(selection)    
+}
 
 
 
