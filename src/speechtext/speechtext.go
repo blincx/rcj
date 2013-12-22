@@ -1,10 +1,8 @@
 package speechtext
 import (
-    //"cfg"
     "fmt"
     "os/exec"
     "strings"
-    "strconv"
 )
 
 
@@ -55,10 +53,9 @@ return plussedstring
 
 
    
-func SpeechText(selection int) {
+func SpeechText(selection string) {
 
-getstring = configgetstring(selection)
-speaktext(getstring)    
+speaktext(selection)    
 
 
 

@@ -9,18 +9,57 @@
 package main
 
 import . "code.google.com/p/goncurses"
-import "speechtext"
-
+import ( 
+    "speechtext"
+    "github.com/jimlawless/cfg"
+    "strconv"
+    "os/exec"
+    "fmt"
+)
+    
+    
+    
 const (
 	HEIGHT = 18
 	WIDTH  = 40
 )
 
 
-func main() {
-	var active int
-    menu := []string{"Introduction", "Who is Sophia Roberts?", "Who is Giovanni Roberts?", "Custody Battle over Lyle", "Ghostcrabs", "The Giant", "Nana's Nose", "Chicken James", "The Guilt We Share", "Roger's Mistakes", "Rubber Band Adventures", "Drinkin' Slosh", "There's a Degree In this Dumpster!", "Exit"}
 
+func check(err error) {
+
+if err != nil {
+    fmt.Println("There was an error: ", err)
+}
+
+
+
+}
+
+
+func main() {
+	
+    // config loader code
+    storymap := make(map[string]string)
+    err := cfg.Load("rcj.cfg",storymap)
+    check(err)
+    
+
+
+
+
+
+    //
+    
+    
+    
+    
+    
+    var active int
+    menu := []string{"Introduction", "Who is Sophia Roberts?", "Who is Giovanni Roberts?", "Ghostcrabs", "The Giant", "Nana's Nose", "Chicken James", "Roger's Mistakes", "Rubber Band Adventures", "Drinkin' Slosh", "There's a Degree In this Dumpster!", "Exit"}
+
+
+    i := 0
 	stdscr, _ := Init()
 	defer End()
 
@@ -35,12 +74,12 @@ func main() {
 	y, x := (((rows-HEIGHT)/2+2)), (cols-WIDTH)/2
     win, _ := NewWindow(HEIGHT, WIDTH, y, x)
 	win.Keypad(true)
-    stdscr.Print("\n\n o\"\"50;@ARGV\a")
-    stdscr.Print("   I am Robot Chicken James.")
+    stdscr.Print("\n o\"\"50;@V\a\n")
+    stdscr.Print("                      ROBOT CHICKEN JAMES\n                         version 1.0")
      
     stdscr.Print("\n\n") 
 
-    stdscr.Print("  I am a Robot who understands your family history. As you get older, your brains will decay, but you can always use me to store your memories. Make a selection to learn more.")
+    stdscr.Print("  \n                   VIRTUAL FAMILY HISTORIAN ")
 	stdscr.Refresh()
 
 	printmenu(&win, menu, active)
@@ -62,11 +101,26 @@ func main() {
 			} else {
 				active += 1
 			}
-		case "enter":
+	// The main action	
+        case "enter":
 			//stdscr.MovePrintf(23, 0, "Choice #%d: %s selected",
 			////	active,
 			////	menu[active])
-		    speechtext.SpeechText(active)	
+            if active==11 {
+            return
+        }
+            i++
+            if i > 4 {
+
+                
+            i = 0 
+            exec.Command("pkill","chrome").Run()
+
+
+            }
+            
+            selection := strconv.Itoa(active)
+            speechtext.SpeechText(storymap[selection])	
             
             // active is the number chosen
             // menu[active] is the menu entry
